@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js" integrity="sha512-E8QSvWZ0eCLGk4km3hxSsNmGWbLtSCSUcewDQPQWZF6pEU8GlT8a5fF32wOl1i8ftdMhssTrF/OhyGWwonTcXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="style.css">
+    <title>Marval</title>
+</head>
+<body>
+    <div class="navbar">
+        <!-- <img href="https://static.vecteezy.com/system/resources/previews/019/550/621/original/marvel-logo-free-download-free-vector.jpg"/> -->
+        <h1 style="margin: 0%; color: white;">MARVEL SUPERHEROS</h1>
+    </div>
+    <div class="searchBarDiv">
+        <input id='searchBar-input' class="searchBar" type="text" placeholder="SEARCH FOR YOUR FAVOURITE SUPERHERO"/>
+        <button id='searchBar-clear' class="searchBar-button">
+            <img src="https://cdn-icons-png.flaticon.com/128/2961/2961937.png" style="width: 50%; height: 50%; border: none;"/>
+        </button>
+
+        <button id='searchBar-submit' class="searchBar-button">
+            <img src="https://cdn-icons-png.flaticon.com/128/5636/5636698.png" style="width: 100%; height: 100%; border: none;"/>
+        </button>
+
+
+    </div>
+    <div class="set-Limit-Order">
+        <div style="padding-left: 5px; background-color: white;">
+            <label>Results per page:</label>
+            <select id="result-per-page-select" class="result-per-page">
+                <option>50</option>
+                <option>100</option>
+            </select>
+        </div>
+        <div style="border-left: 1px solid lightgray;padding-left: 5px; background-color: white;">
+            <label>Order by:</label>
+            <select id="order-by-select" class="order-by">
+                <option>name</option>
+                <option>modified</option>
+                <option>-name</option>
+                <option>-modified</option>
+            </select>
+        </div>
+    </div>
+    <div class="result-container">
+        <h2>All SUPERHEROS</h2>
+        <div class="superhero-cards-container">
+
+        </div>
+    </div>
+    <div class="pagination-box">
+
+    </div>
+
+    <div id="header"></div>
+    <div class="page"></div>
+    <script src="index.js"></script>
+</body>
+</html>

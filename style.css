@@ -1,0 +1,105 @@
+*{
+    font-family: "Roboto","Trebuchet MS",Helvetica,Arial,sans-serif;
+    
+}
+body{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* background-color: #EC1D24; */
+    /* box-sizing: border-box; */
+}
+
+.navbar{
+    background-color: #202020;
+    text-align: center;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.searchBarDiv{
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    height: 40px;
+    border: 1px solid lightslategray;
+    width: 40%;
+}
+
+.searchBar{
+    width: 80%;
+    border: none;
+}
+
+.searchBar-button{
+    background-color: white;
+    width: 10%; 
+    border: none;
+    border-left: 1px solid lightgray;
+    padding: 0;
+}
+
+.searchBar-button :hover{
+    box-shadow: 0px 0px 2px 2px rgb(0,0,0);
+}
+
+input::placeholder{
+    color: lightgrey;
+    text-align: center;
+    font-size: 1rem;
+    /* line-height: 1.5; */
+}
+
+.set-Limit-Order{
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid lightslategray;
+    border-top: none;
+}
+
+.result-per-page{
+    padding: 10px;
+    /* width: 80%; */
+    border: none;
+}
+.result-per-page  select{
+    width: 50%;
+}
+
+.order-by{
+    padding: 10px;
+    /* width: 80%; */
+    border: none;
+}
+.order-by  select{
+    width: 50%;
+}
+
+.result-container{
+    width: 100%;
+    height: auto;
+    margin-top: 20px;
+}
+
+.result-container h1{
+    color: #000;
+    text-align: center;
+}
+
+.superhero-cards-container{
+    display: flex;
+    flex-direction: row;
+}
+
+.superhero-cards{
+
+}
