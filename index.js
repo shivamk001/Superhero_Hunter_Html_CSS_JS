@@ -8,17 +8,33 @@ let orderBy='name'
 let searchBarInput=document.getElementById('searchBar-input')
 let searchBarClear=document.getElementById('searchBar-clear')
 let searchBarButton=document.getElementById('searchBar-submit')
-let resultPerPageSelect=document.getElementById("result-per-page-select")
+//let resultPerPageSelect=document.getElementById("result-per-page-select")
 let orderBySelect=document.getElementById("order-by-select")
+let superHeroContainer=document.getElementById('superhero-cards-container')
 
-resultPerPageSelect.addEventListener('click', ()=>{limit=resultPerPageSelect.value})
-
+//resultPerPageSelect.addEventListener('click', ()=>{limit=resultPerPageSelect.value})
 orderBySelect.addEventListener('click', ()=>{orderBy=orderBySelect.value})
-
 searchBarClear.addEventListener('click', ()=>{searchBarInput.value=''})
 
 function displayData(result){
-    console.log(result)
+    result.forEach(element => {
+        console.log(element)
+        const superheroCard=document.createElement('div')
+        superheroCard.classList.add('superhero-card')
+        superheroCard.id=element.id
+        let imagePath=element.thumbnail.path+'/portrait_xlarge.'+element.thumbnail.extension
+        // 
+        superheroCard.innerHTML=
+        `
+        <img src=${imagePath} alt=${element.name} />
+        <div class="superhero-details">
+            <h1>${element.name.toUpperCase()}</h1>
+            <p>${element.description.length>0?element.description:'Description not available'}</p>
+            <i class="fa-solid fa-heart fa-2xl"></i>
+        </div>`
+        // <img src="https://cdn-icons-png.flaticon.com/128/2550/2550224.png"/>
+        superHeroContainer.appendChild(superheroCard)
+    });
 }
 
 function searchSuperHero(){
@@ -55,7 +71,7 @@ function getAllSuperheros(){
     let publicKey=getPublicKey()
     let timestampHash=getHash()
     let url=`https://gateway.marvel.com:443/v1/public/characters?orderBy=name&limit=99&ts=${timestampHash[0]}&apikey=${publicKey}&hash=${timestampHash[1]}`
-    fetchData(url).then((data)=>console.log(data.data))
+    fetchData(url).then((data)=>displayData(data.data.results))
 }
 
 async function fetchData(url){

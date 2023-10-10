@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js" integrity="sha512-E8QSvWZ0eCLGk4km3hxSsNmGWbLtSCSUcewDQPQWZF6pEU8GlT8a5fF32wOl1i8ftdMhssTrF/OhyGWwonTcXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://kit.fontawesome.com/ca58c8957e.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css">
+    
     <title>Marval</title>
 </head>
 <body>
@@ -25,13 +27,13 @@
 
     </div>
     <div class="set-Limit-Order">
-        <div style="padding-left: 5px; background-color: white;">
+        <!-- <div style="padding-left: 5px; background-color: white;">
             <label>Results per page:</label>
             <select id="result-per-page-select" class="result-per-page">
                 <option>50</option>
                 <option>100</option>
             </select>
-        </div>
+        </div> -->
         <div style="border-left: 1px solid lightgray;padding-left: 5px; background-color: white;">
             <label>Order by:</label>
             <select id="order-by-select" class="order-by">
@@ -44,8 +46,7 @@
     </div>
     <div class="result-container">
         <h2>All SUPERHEROS</h2>
-        <div class="superhero-cards-container">
-
+        <div id="superhero-cards-container" class="superhero-cards-container">
         </div>
     </div>
     <div class="pagination-box">
