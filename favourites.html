@@ -12,16 +12,16 @@
     https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.min.css
     " rel="stylesheet">
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styleFavs.css">
     
-    <title>Marval Superheros Hunter</title>
+    <title>Favourite Marval Superheros</title>
 </head>
 <body>
     <div class="navbar">
         <!-- <img href="https://static.vecteezy.com/system/resources/previews/019/550/621/original/marvel-logo-free-download-free-vector.jpg"/> -->
         <img src="SuperHeroHunter(1).png" style="height: 100%; margin-left: 10px; margin-top: 10px;"/>
         <div class="navbarButtonDiv">
-            <a href="favourites.html" id="displayFavourites" class="navbarButton" target="_blank"><i class="fa-regular fa-star fa-xl" style="color: aliceblue;"></i></a>
+            <a href="index.html" id="displayFavourites" class="navbarButton"><i class="fa-solid fa-house fa-xl" style="color: aliceblue;"></i></a>
             <button id="displaySearchButton" type="button" class="navbarButton"><i class="fa-solid fa-magnifying-glass fa-xl" style="color: aliceblue;"></i></button>
         </div>
     </div>
@@ -40,18 +40,18 @@
 
 
         <button id='searchBar-clear' class="searchBar-button">
-            <i class="fa-solid fa-x fa-xl" style="color: aliceblue;"></i>
+            <i class="fa-solid fa-x fa-2xl" style="color: aliceblue;"></i>
         </button>
 
         <button id='searchBar-submit' class="searchBar-button">
-            <i class="fa-solid fa-magnifying-glass fa-xl" style="color: aliceblue;"></i>
+            <i class="fa-solid fa-magnifying-glass fa-2xl" style="color: aliceblue;"></i>
         </button>
 
 
     </div>
 
     <div class="result-container">
-        <h1 id="result-container-heading" class="result-container-heading" style="color: aliceblue; text-align: center; font-weight: bold;">ALL SUPERHEROS</h1>
+        <h1 id="result-container-heading" class="result-container-heading" style="color: aliceblue; text-align: center; font-weight: bold;">ALL FAVOURITE SUPERHEROS</h1>
         <div id="superhero-cards-container" class="superhero-cards-container">
         </div>
     </div>
@@ -61,6 +61,6 @@
 
     <div id="header"></div>
     <div class="page"></div>
-    <script src="index.js"></script>
+    <script src="favourites.js"></script>
 </body>
 </html>

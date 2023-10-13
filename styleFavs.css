@@ -163,13 +163,13 @@ input::placeholder{
     border-radius: 1rem;
 }
 
-/* .superhero-card i{
+.superhero-card i{
     position: absolute;
     top: 90%;
     left: 5%;
     color: goldenrod;
     z-index: 1000;
-} */
+}
 
 .superhero-card i:hover{
     color: white;
@@ -213,7 +213,7 @@ input::placeholder{
 }
 
 .superhero-details i:hover{
-    color: goldenrod;
+    color: red;
 }
 
 
