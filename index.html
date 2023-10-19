@@ -11,7 +11,7 @@
     <link href="
     https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.min.css
     " rel="stylesheet">
-
+    <link rel="icon" type="image/x-icon" href="SuperHeroHunter.ico">
     <link rel="stylesheet" href="style.css">
     
     <title>Marval Superheros Hunter</title>
@@ -19,10 +19,14 @@
 <body>
     <div class="navbar">
         <!-- <img href="https://static.vecteezy.com/system/resources/previews/019/550/621/original/marvel-logo-free-download-free-vector.jpg"/> -->
-        <img src="SuperHeroHunter(1).png" style="height: 100%; margin-left: 10px; margin-top: 10px;"/>
+        <img src="SuperHeroHunter.png" style="height: 100%; margin-left: 10px; margin-top: 10px;"/>
         <div class="navbarButtonDiv">
-            <a href="favourites.html" id="displayFavourites" class="navbarButton" target="_blank"><i class="fa-regular fa-star fa-xl" style="color: aliceblue;"></i></a>
-            <button id="displaySearchButton" type="button" class="navbarButton"><i class="fa-solid fa-magnifying-glass fa-xl" style="color: aliceblue;"></i></button>
+            <a href="index.html" id="displayFavourites" class="navbarButton tooltip-icon"><i class="fa-solid fa-house fa-xl" style="color: aliceblue;"></i></a>
+            <div class="tooltip" style="top: 10%; left: 90%; width: 10%;">Go to home page</div>
+            <a href="favourites.html" id="displayFavourites" class="navbarButton tooltip-icon" target="_blank"><i class="fa-regular fa-star fa-xl" style="color: aliceblue;"></i></a>
+            <div class="tooltip" style="top: 10%; left: 90%; width: 10%;">Go to favourites page</div>
+            <button id="displaySearchButton" type="button" class="navbarButton tooltip-icon"><i class="fa-solid fa-magnifying-glass fa-xl" style="color: aliceblue;"></i></button>
+            <div class="tooltip" style="top: 10%; left: 90%; width: 10%;">Open search bar</div>
         </div>
     </div>
 
@@ -50,9 +54,9 @@
 
     </div>
 
-    <div class="result-container">
+    <div class="result-container" id="resultContainer">
         <h1 id="result-container-heading" class="result-container-heading" style="color: aliceblue; text-align: center; font-weight: bold;">ALL SUPERHEROS</h1>
-        <div id="superhero-cards-container" class="superhero-cards-container">
+        <div id="superhero-cards-container" class="cards-container">
         </div>
     </div>
     <div class="pagination-box">
