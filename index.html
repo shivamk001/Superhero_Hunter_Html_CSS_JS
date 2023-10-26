@@ -20,7 +20,7 @@
     <div class="navbar">
         <!-- <img href="https://static.vecteezy.com/system/resources/previews/019/550/621/original/marvel-logo-free-download-free-vector.jpg"/> -->
         <img src="SuperHeroHunter.png" style="height: 100%; margin-left: 10px; margin-top: 10px;"/>
-        <div class="navbarButtonDiv">
+        <div class="navbarButtonDiv" id="navbarButtonDiv">
             <a href="index.html" id="displayFavourites" class="navbarButton tooltip-icon"><i class="fa-solid fa-house fa-xl" style="color: aliceblue;"></i></a>
             <div class="tooltip" style="top: 10%; left: 90%; width: 10%;">Go to home page</div>
             <a href="favourites.html" id="displayFavourites" class="navbarButton tooltip-icon" target="_blank"><i class="fa-regular fa-star fa-xl" style="color: aliceblue;"></i></a>
@@ -34,27 +34,32 @@
         <input id='searchBar-input' class="searchBar" type="text" placeholder="SEARCH FOR YOUR FAVOURITE SUPERHERO"/>
         
         
-        <select id="order-by-select" class="order-by">
-            <option value="">Order By</option>
-            <option>name</option>
-            <option>modified</option>
-            <option>-name</option>
-            <option>-modified</option>
-        </select>
+        <div style="display: flex;">
+            <select id="order-by-select" class="order-by tooltip-icon">
+                <option hidden selected value>Order By</option>
+                <option>name</option>
+                <option>modified</option>
+                <option>-name</option>
+                <option>-modified</option>
+            </select>
+            <span class="tooltip" style="top: 20%; left: 65%; width: auto;">Order By</span>
+    
+            <button id='searchBar-clear' class="searchBar-button">
+                <i class="fa-solid fa-x fa-sm tooltip-icon" style="color: aliceblue;"></i>
+                <span class="tooltip" style="top: 20%; left: 70%; width: auto;">Clear text input</span>
+            </button>
+    
+            <button id='searchBar-submit' class="searchBar-button">
+                <i class="fa-solid fa-magnifying-glass fa-sm tooltip-icon" style="color: aliceblue;"></i>
+                <span class="tooltip" style="top: 20%; left: 70%; width: auto;">Search Button</span>
+            </button>
+        </div>
 
-
-        <button id='searchBar-clear' class="searchBar-button">
-            <i class="fa-solid fa-x fa-xl" style="color: aliceblue;"></i>
-        </button>
-
-        <button id='searchBar-submit' class="searchBar-button">
-            <i class="fa-solid fa-magnifying-glass fa-xl" style="color: aliceblue;"></i>
-        </button>
 
 
     </div>
 
-    <div class="result-container" id="resultContainer">
+    <div class="result-container" id="mainContainer">
         <h1 id="result-container-heading" class="result-container-heading" style="color: aliceblue; text-align: center; font-weight: bold;">ALL SUPERHEROS</h1>
         <div id="superhero-cards-container" class="cards-container">
         </div>

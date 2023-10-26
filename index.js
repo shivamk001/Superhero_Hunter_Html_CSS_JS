@@ -3,40 +3,20 @@ let limit=100
 let allSuperHeros=[]
 
 let displaySearchButton=document.getElementById('displaySearchButton')
-let displayFavourites=document.getElementById('displayFavourites')
 let searchBarDiv=document.getElementById('searchBarDiv')
 
-let resultContainer=document.getElementById('resultContainer')
-let resultContainerHeading=document.getElementById('result-container-heading')
+let mainContainer=document.getElementById('mainContainer')
+let mainContainerHeading=document.getElementById('result-container-heading')
 let searchBarInput=document.getElementById('searchBar-input')
 let searchBarClear=document.getElementById('searchBar-clear')
 let searchBarButton=document.getElementById('searchBar-submit')
-let resultPerPageSelect=document.getElementById("result-per-page-select")
+
 let orderBySelect=document.getElementById("order-by-select")
 let superHeroContainer=document.getElementById('superhero-cards-container')
 
+let navbarButtonDiv=document.getElementById('navbarButtonDiv')
 
-function toggleSearchBar(){
-    let isVisible=searchBarDiv.style.visibility.length===0?false: true
-    console.log('searchBarDiv.style.display:', searchBarDiv.style.visibility)
-    if(!isVisible){
-        searchBarDiv.style.visibility='visible'
-        searchBarDiv.style.display='flex'
-    }
-    else{
-        searchBarDiv.style.visibility=''
-        searchBarDiv.style.display=''
-    }
-}
-displaySearchButton.addEventListener('click', toggleSearchBar)
-
-function displayFavouriteSuperHeros(){
-    console.log('DisplayFavs');
-}   
-displayFavourites.addEventListener('click', displayFavouriteSuperHeros)
-orderBySelect.addEventListener('click', ()=>{orderBy=orderBySelect.value})
-searchBarClear.addEventListener('click', ()=>{searchBarInput.value=''})
-
+//TO DISPLAY TOAST ON ADDING TO FAVOURITES/REMOVING FROM FAVOURITES
 const Toast = Swal.mixin({
     toast: true,
     position: 'top-end',
@@ -49,6 +29,21 @@ const Toast = Swal.mixin({
     }
   })
 
+//open/close search bar on clicking search icon in navbar
+function toggleSearchBar(){
+    let isVisible=searchBarDiv.style.visibility.length===0?false: true
+    console.log('searchBarDiv.style.display:', searchBarDiv.style.visibility)
+    if(!isVisible){
+        searchBarDiv.style.visibility='visible'
+        searchBarDiv.style.display='flex'
+    }
+    else{
+        searchBarDiv.style.visibility=''
+        searchBarDiv.style.display=''
+    }
+}
+
+//TO ADD REMOVE SUPERHERO FROM FAVOURITES
 function addToFavourites(event){
     event.stopPropagation()//prevent propagation of event to parent elements
     console.log('Clicked');
@@ -117,6 +112,7 @@ function addToFavourites(event){
     }
 }
 
+//TO DISPLAY SUPERHEROS IN HOMEPAGE/ IN SEARCH RESULT
 function displaySuperHeros(result){
     let favouriteSuperheros=JSON.parse(localStorage.getItem('favouriteSuperheros'));
     result.forEach(element => {
@@ -124,7 +120,7 @@ function displaySuperHeros(result){
         let {id, thumbnail, name, description}=element
 
         let color=''
-        if(favouriteSuperheros[id]){
+        if(favouriteSuperheros && favouriteSuperheros[id]){
             color='goldenrod'
         }
         else{
@@ -174,7 +170,7 @@ function displaySuperHeros(result){
     });
 }
 
-
+//TO DISPLAY COMICS DATA, EVENTS DATA, SERIES DATA IN SUPERHERO PAGE
 function displayData(result, container){
 
     result.forEach(element => {
@@ -207,8 +203,7 @@ function displayData(result, container){
     });
 }
 
-
-
+//TO DISPLAY STORIES DATA IN SUPERHERO PAGE
 function displayStoriesData(result, storiesContainer){
 
     result.forEach(element => {
@@ -217,7 +212,7 @@ function displayStoriesData(result, storiesContainer){
         
         //let imagePath=thumbnail.path+'/portrait_xlarge.'+thumbnail.extension
         const storiesCard=document.createElement('div')
-        storiesCard.classList.add('card')
+        storiesCard.classList.add('stories-card')
         storiesCard.id=id
         //storiesCard.addEventListener('click',openSuperHeroPage.bind({id, imagePath, description}))
 
@@ -236,17 +231,15 @@ function displayStoriesData(result, storiesContainer){
 
         storiesCard.innerHTML=
         `
-        <div class="stories-details">
-            <h1>${title}</h1>
-            <p class="card-description-text">${description}</p>
-            <!--<i data-id=${id} data-title=${title} class="fa-solid fa-star fa-xl" onclick="addToFavourites(this)"></i>-->
-        </div>`
+        <h1>${title}</h1>
+        <p class="card-description-text">${description}</p>
+        `
 
         storiesContainer.appendChild(storiesCard)
     });
 }
 
-
+//TO DISPLAY SUPERHERO PAGE
 async function openSuperHeroPage(){
     console.log(this);
     let {id, name, imagePath, description}=this
@@ -254,12 +247,20 @@ async function openSuperHeroPage(){
     let publicKey=getPublicKey()
     let timestampHash=getHash()
 
-    resultContainer.replaceChildren();
+    navbarButtonDiv.innerHTML=`
+    <a href="index.html" id="displayFavourites" class="navbarButton tooltip-icon"><i class="fa-solid fa-house fa-xl" style="color: aliceblue;"></i></a>
+    <div class="tooltip" style="top: 10%; left: 90%; width: 10%;">Go to home page</div>
+    <a href="favourites.html" id="displayFavourites" class="navbarButton tooltip-icon" target="_blank"><i class="fa-regular fa-star fa-xl" style="color: aliceblue;"></i></a>
+    <div class="tooltip" style="top: 10%; left: 90%; width: 10%;">Go to favourites page</div>
+`   
+    searchBarDiv.remove()
+
+    mainContainer.replaceChildren();
     let h1=document.createElement('h1')
     h1.textContent=name
     h1.style.color='white'
     h1.style.textAlign='center'
-    resultContainer.appendChild(h1)
+    mainContainer.appendChild(h1)
 
     let imageDescriptionContainer=document.createElement('section')
     imageDescriptionContainer.classList.add('imageDescriptionContainer')
@@ -275,7 +276,7 @@ async function openSuperHeroPage(){
     p.style.color='white'
     descriptionDiv.appendChild(p)
     imageDescriptionContainer.appendChild(descriptionDiv)
-    resultContainer.appendChild(imageDescriptionContainer)
+    mainContainer.appendChild(imageDescriptionContainer)
 
 
     //COMICS
@@ -296,7 +297,7 @@ async function openSuperHeroPage(){
     comicsContainer.classList.add('cards-container')
     displayData(comics.results, comicsContainer)
     comicsSection.appendChild(comicsContainer)
-    resultContainer.appendChild(comicsSection)
+    mainContainer.appendChild(comicsSection)
 
 
     //EVENTS
@@ -317,7 +318,7 @@ async function openSuperHeroPage(){
     eventsContainer.classList.add('cards-container')
     displayData(events.results, eventsContainer)
     eventsSection.appendChild(eventsContainer)
-    resultContainer.appendChild(eventsSection)
+    mainContainer.appendChild(eventsSection)
 
 
     //SERIES    
@@ -338,7 +339,7 @@ async function openSuperHeroPage(){
     seriesContainer.classList.add('cards-container')
     displayData(series.results, seriesContainer)
     seriesSection.appendChild(seriesContainer)
-    resultContainer.appendChild(seriesSection)
+    mainContainer.appendChild(seriesSection)
 
 
     //STORIES
@@ -357,13 +358,13 @@ async function openSuperHeroPage(){
     
 
     let storiesContainer=document.createElement('div')
-    storiesContainer.classList.add('cards-container')
+    storiesContainer.classList.add('stories-container')
     displayStoriesData(stories.results, storiesContainer)
     storiesSection.appendChild(storiesContainer)
-    resultContainer.appendChild(storiesSection)
+    mainContainer.appendChild(storiesSection)
 }
 
-
+//TO SEARCH A SUPERHERO
 async function searchSuperHero(){
     console.log('Clicked', searchBarInput.value, orderBy)
     let result=[]
@@ -381,23 +382,25 @@ async function searchSuperHero(){
         superHeroContainer.removeChild(superHeroContainer.firstChild)
     }
 
-    resultContainerHeading.innerText=`Showing search results for: ${input}`
+    mainContainerHeading.innerText=`Showing search results for: ${input}`
 
     displaySuperHeros(result)
 
 }
-searchBarButton.addEventListener('click', searchSuperHero)
 
+//TO GET TIMESTAMP TO FETCH DATA FROM MARVEL API
 function getTimeStamp(){
     let timeStamp=Date.now().toString()
     return timeStamp
 }
 
+//TO GET PUBLIC KEY TO FETCH DATA FROM MARVEL API
 function getPublicKey(){
     const publicKey='84e760e71f426db6089f9b7f40c85919'
     return publicKey
 }
 
+//TO GET HASH TO FETCH DATA FROM MARVEL API
 function getHash(){
     let publicKey=getPublicKey()
     const privateKey='bfa58e25d86f1fdbd11b0f1610960ade4fc5c36b'
@@ -406,8 +409,7 @@ function getHash(){
     return [timeStamp, hash]
 }
 
-
-
+//TO FETCH ALL SUPERHEROS DATA
 async function getAllSuperheros(){
     let publicKey=getPublicKey()
     let timestampHash=getHash()
@@ -433,6 +435,7 @@ async function getAllSuperheros(){
 
 }
 
+//FETCHES DATA FROM API
 async function fetchData(url){
     try{
         //console.log(url)
@@ -447,77 +450,18 @@ async function fetchData(url){
         console.log(err)
     }
 }
+
+
+
+
+//EVENT LISTENERS
+displaySearchButton.addEventListener('click', toggleSearchBar)
+orderBySelect.addEventListener('click', ()=>{orderBy=orderBySelect.value})
+searchBarClear.addEventListener('click', ()=>{searchBarInput.value=''})
+searchBarButton.addEventListener('click', searchSuperHero)
+
+
+
+
 getAllSuperheros()
 
-
-// function displayEventsData(result, eventsContainer){
-
-//     result.forEach(element => {
-
-//         let {id, thumbnail, title, description, start}=element
-        
-//         let imagePath=thumbnail.path+'/portrait_xlarge.'+thumbnail.extension
-//         const comicsCard=document.createElement('div')
-//         comicsCard.classList.add('superhero-card')
-//         comicsCard.id=id
-//         //comicsCard.addEventListener('click',openSuperHeroPage.bind({id, imagePath, description}))
-
-        
-//         title=title.slice(0,40)
-//         console.log(title, title.length)
-//         description=description && description.length>0?
-//                             description.length<250  ? description : description.slice(0,250)+'...':
-//                             'Description not available'
-
-//         comicsCard.innerHTML=
-//         `
-//         <img src=${imagePath} alt=${title} />
-//         <div class="card-details">
-//             <h1>${title}</h1>
-//             <p class="card-description-text">${description}</p>
-//             <!--<i data-id=${id} data-title=${title} class="fa-solid fa-star fa-xl" onclick="addToFavourites(this)"></i>-->
-//         </div>`
-
-//         eventsContainer.appendChild(comicsCard)
-//     });
-// }
-
-
-
-// function displaySeriesData(result, seriesContainer){
-
-//     result.forEach(element => {
-
-//         let {id, thumbnail, title, description, start}=element
-        
-//         let imagePath=thumbnail.path+'/portrait_xlarge.'+thumbnail.extension
-//         const seriesCard=document.createElement('div')
-//         seriesCard.classList.add('superhero-card')
-//         seriesCard.id=id
-//         //seriesCard.addEventListener('click',openSuperHeroPage.bind({id, imagePath, description}))
-
-//         if(title){
-//             if(description){
-//                if(title.length>40){
-//                 title=title.slice(0,40)+'...'
-//                }
-//             }
-//             //if description does not exist let title be full length
-//         }
-//         console.log(title, title.length)
-//         description=description && description.length>0?
-//                             description.length<250  ? description : description.slice(0,250)+'...':
-//                             'Description not available'
-
-//         seriesCard.innerHTML=
-//         `
-//         <img src=${imagePath} alt=${title} />
-//         <div class="card-details">
-//             <h1>${title}</h1>
-//             <p class="card-description-text">${description}</p>
-//             <!--<i data-id=${id} data-title=${title} class="fa-solid fa-star fa-xl" onclick="addToFavourites(this)"></i>-->
-//         </div>`
-
-//         seriesContainer.appendChild(seriesCard)
-//     });
-// }

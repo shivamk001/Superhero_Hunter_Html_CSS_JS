@@ -1,15 +1,37 @@
 //import {getHash, getPublicKey, getTimeStamp, fetchData} from './index.js'
 
+let navbarButtonDiv=document.getElementById('navbarButtonDiv')
+let searchBarDiv=document.getElementById('searchBarDiv')
+let mainContainer=document.getElementById('mainContainer')
+let superHeroContainer=document.getElementById('superhero-cards-container')
+let favouriteSuperheros=JSON.parse(localStorage.getItem('favouriteSuperheros'))
+
+//TO DISPLAY TOAST ON ADDING TO FAVOURITES/REMOVING FROM FAVOURITES
+const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: true,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer)
+      toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+  })
+
+//TO GET TIMESTAMP TO FETCH DATA FROM MARVEL API
 function getTimeStamp(){
     let timeStamp=Date.now().toString()
     return timeStamp
 }
 
+//TO GET TIMESTAMP TO FETCH DATA FROM MARVEL API
 function getPublicKey(){
     const publicKey='84e760e71f426db6089f9b7f40c85919'
     return publicKey
 }
 
+//TO GET HASH TO FETCH DATA FROM MARVEL API
 function getHash(){
     let publicKey=getPublicKey()
     const privateKey='bfa58e25d86f1fdbd11b0f1610960ade4fc5c36b'
@@ -18,7 +40,7 @@ function getHash(){
     return [timeStamp, hash]
 }
 
-
+//FETCHES DATA FROM API
 async function fetchData(url){
     try{
         //console.log(url)
@@ -34,23 +56,9 @@ async function fetchData(url){
     }
 }
 
-let resultContainer=document.getElementById('resultContainer')
-let superHeroContainer=document.getElementById('superhero-cards-container')
-let favouriteSuperheros=JSON.parse(localStorage.getItem('favouriteSuperheros'))
-//console.log('Favourite Superheros:', favouriteSuperheros);
 
-const Toast = Swal.mixin({
-    toast: true,
-    position: 'top-end',
-    showConfirmButton: true,
-    timer: 3000,
-    timerProgressBar: true,
-    didOpen: (toast) => {
-      toast.addEventListener('mouseenter', Swal.stopTimer)
-      toast.addEventListener('mouseleave', Swal.resumeTimer)
-    }
-  })
 
+//TO UNFAVOURITE A SUPERHERO
 function unFavouriteSuperhero(event){
     event.stopPropagation()
     let superhero=event.target
@@ -70,7 +78,7 @@ function unFavouriteSuperhero(event){
     }
 }
 
-
+//TO DISPLAY COMICS DATA, EVENTS DATA, SERIES DATA IN SUPERHERO PAGE
 function displayData(result, container){
 
     result.forEach(element => {
@@ -103,6 +111,7 @@ function displayData(result, container){
     });
 }
 
+//TO DISPLAY STORIES DATA IN SUPERHERO PAGE
 function displayStoriesData(result, storiesContainer){
 
     result.forEach(element => {
@@ -111,7 +120,7 @@ function displayStoriesData(result, storiesContainer){
         
         //let imagePath=thumbnail.path+'/portrait_xlarge.'+thumbnail.extension
         const storiesCard=document.createElement('div')
-        storiesCard.classList.add('card')
+        storiesCard.classList.add('stories-card')
         storiesCard.id=id
         //storiesCard.addEventListener('click',openSuperHeroPage.bind({id, imagePath, description}))
 
@@ -123,23 +132,22 @@ function displayStoriesData(result, storiesContainer){
             }
             //if description does not exist let title be full length
         }
-        //console.log(title, title.length)
+        console.log(title, title.length)
         description=description && description.length>0?
                             description.length<250  ? description : description.slice(0,250)+'...':
                             'Description not available'
 
         storiesCard.innerHTML=
         `
-        <div class="stories-details">
-            <h1>${title}</h1>
-            <p class="card-description-text">${description}</p>
-            <!--<i data-id=${id} data-title=${title} class="fa-solid fa-star fa-xl" onclick="addToFavourites(this)"></i>-->
-        </div>`
+        <h1>${title}</h1>
+        <p class="card-description-text">${description}</p>
+        `
 
         storiesContainer.appendChild(storiesCard)
     });
 }
 
+//TO DISPLAY SUPERHERO PAGE
 async function openSuperHeroPage(){
     //console.log(this);
     let {id, name, imagePath, description}=this
@@ -147,12 +155,21 @@ async function openSuperHeroPage(){
     let publicKey=getPublicKey()
     let timestampHash=getHash()
 
-    resultContainer.replaceChildren();
+    navbarButtonDiv.innerHTML=`
+        <a href="index.html" id="displayFavourites" class="navbarButton tooltip-icon"><i class="fa-solid fa-house fa-xl" style="color: aliceblue;"></i></a>
+        <div class="tooltip" style="top: 10%; left: 90%; width: 10%;">Go to home page</div>
+        <a href="favourites.html" id="displayFavourites" class="navbarButton tooltip-icon" target="_blank"><i class="fa-regular fa-star fa-xl" style="color: aliceblue;"></i></a>
+        <div class="tooltip" style="top: 10%; left: 90%; width: 10%;">Go to favourites page</div>
+    `
+
+    searchBarDiv.remove()
+
+    mainContainer.replaceChildren();
     let h1=document.createElement('h1')
     h1.textContent=name
     h1.style.color='white'
     h1.style.textAlign='center'
-    resultContainer.appendChild(h1)
+    mainContainer.appendChild(h1)
 
     let imageDescriptionContainer=document.createElement('section')
     imageDescriptionContainer.classList.add('imageDescriptionContainer')
@@ -168,7 +185,7 @@ async function openSuperHeroPage(){
     p.style.color='white'
     descriptionDiv.appendChild(p)
     imageDescriptionContainer.appendChild(descriptionDiv)
-    resultContainer.appendChild(imageDescriptionContainer)
+    mainContainer.appendChild(imageDescriptionContainer)
 
 
     //COMICS
@@ -189,7 +206,7 @@ async function openSuperHeroPage(){
     comicsContainer.classList.add('cards-container')
     displayData(comics.results, comicsContainer)
     comicsSection.appendChild(comicsContainer)
-    resultContainer.appendChild(comicsSection)
+    mainContainer.appendChild(comicsSection)
 
 
     //EVENTS
@@ -210,7 +227,7 @@ async function openSuperHeroPage(){
     eventsContainer.classList.add('cards-container')
     displayData(events.results, eventsContainer)
     eventsSection.appendChild(eventsContainer)
-    resultContainer.appendChild(eventsSection)
+    mainContainer.appendChild(eventsSection)
 
 
     //SERIES    
@@ -231,7 +248,7 @@ async function openSuperHeroPage(){
     seriesContainer.classList.add('cards-container')
     displayData(series.results, seriesContainer)
     seriesSection.appendChild(seriesContainer)
-    resultContainer.appendChild(seriesSection)
+    mainContainer.appendChild(seriesSection)
 
 
     //STORIES
@@ -253,13 +270,11 @@ async function openSuperHeroPage(){
     storiesContainer.classList.add('cards-container')
     displayStoriesData(stories.results, storiesContainer)
     storiesSection.appendChild(storiesContainer)
-    resultContainer.appendChild(storiesSection)
+    mainContainer.appendChild(storiesSection)
 }
 
 
-
-
-
+//TO DISPLAY ALL SUPERHEROS IN FAVOURITES PAGE
 function displayFavouriteSuperHeros(){
     
     //console.log(favouriteSuperheros);

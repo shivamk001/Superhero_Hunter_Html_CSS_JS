@@ -17,6 +17,7 @@ body{
 
 }
 
+/* CSS FOR NAVIGATION BAR */
 .navbar{    
     /* background-color: black;  For browsers that do not support gradients  */
     background-image: linear-gradient(to right, #020107 , #221b1b);/*to right*/
@@ -50,7 +51,7 @@ body{
     padding: 7%;
 }
 
-
+/* CSS FOR SEARCH BAR */
 .searchBarDiv{
     visibility: hidden;
     display: none;
@@ -61,6 +62,7 @@ body{
     border-radius: 1.5rem;
     width: 40%;
     border: 2px solid aliceblue;
+    margin-top: 10px;
 }
 
 .searchBar{
@@ -73,9 +75,10 @@ body{
     
 }
 
+/* CSS FOR SEARCH BUTTON AND X BUTTON IN SEARCH BAR */
 .searchBar-button{
     background-color: white;
-    width: 10%; 
+    width: 25%; 
     border: none;
     border-left: 1px solid lightgray;
     padding: 0;
@@ -84,6 +87,7 @@ body{
     background-color: transparent;
     color: white;
 }
+
 
 .searchBar-button :hover{
     box-shadow: 0px 0px 2px 2px rgb(0,0,0);
@@ -96,23 +100,7 @@ input::placeholder{
     /* line-height: 1.5; */
 }
 
-.setLimitOrder{
-    /* display: flex; */
-    display: none;
-    justify-content: space-between;
-    border: 1px solid lightslategray;
-    border-top: none;
-}
-
-.result-per-page{
-    padding: 10px;
-    /* width: 80%; */
-    border: none;
-}
-.result-per-page  select{
-    width: 50%;
-}
-
+/* CSS FOR ORDER SELECT TAG IN SEARCHBAR */
 .order-by{
     padding: 10px;
     /* width: 80%; */
@@ -127,6 +115,8 @@ input::placeholder{
     background-color: black;
 }
 
+
+/* TOOLTIP CSS */
 .tooltip-icon {
     position: relative;
     cursor: pointer;
@@ -152,8 +142,8 @@ input::placeholder{
     display: block;
 }
 
-
-.result-container{
+/* CSS FOR THE CONTAINER WHICH CONTAINS ALL THE SUPERHERO H1 AND CONTAINER */
+.main-container{
     width: 100%;
     height: auto;
     margin-top: 5px;
@@ -163,11 +153,12 @@ input::placeholder{
     justify-content: center;
 }
 
-.result-container h2{
+.main-container h2{
     color: #000;
     text-align: center;
 }
 
+/* THE CONTAINER WHICH CONTAINS THE SUPERHERO CARDS */
 .superhero-cards-container{
     display: flex;
     flex-direction: row;
@@ -177,6 +168,8 @@ input::placeholder{
     
 }
 
+
+/* CSS OF THE SUPERHERO CARD*/
 .superhero-card{
     box-shadow: black 0px 7px 10px 2px; /*horizontal vertical blur radius*/
     margin: 20px;
@@ -287,6 +280,9 @@ input::placeholder{
 
 
 
+
+
+/* CSS FOR IMAGE AND DESCRIPTION IN SUPERHERO PAGE*/
 .imageDescriptionContainer{
     display: flex;
     flex-direction: row;
@@ -327,6 +323,9 @@ input::placeholder{
 }
 
 
+
+
+/* CSS OF THE SUPERHERO CARD, STORIES CARD, EVENTS CARD, COMICS CARD, EVENTS CARD */
 .card{
     box-shadow: black 0px 7px 10px 2px; /*horizontal vertical blur radius*/
     margin: 20px;
@@ -408,7 +407,7 @@ input::placeholder{
 }
 
 
-
+/* CSS FOR SECTIONS IN SUPERHERO PAGE */
 .section{
     width: 90%;
 }
@@ -421,6 +420,41 @@ input::placeholder{
 
 
 
+
+/* CSS FOR STORIES IN SUPERHERO PAGE*/
+.stories-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    /* display: block;*/
+} 
+
+
+.stories-card{
+    box-shadow: #3d3232 0px 7px 10px 2px; /*horizontal vertical blur radius*/
+    margin: 20px;
+    /* border-radius: 1rem; */
+    width: 90%;
+    /* cursor: pointer; */
+    /* position: relative; */
+    color: white;
+}
+
+.stories-card h1{
+    text-align: left;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.stories-card p{
+    text-align: justify;
+    padding-left: 10px;
+    padding-right: 10px;
+}
 .stories-details{
     transition: all 0.5s ease-in-out;
     color: white;
@@ -433,3 +467,4 @@ input::placeholder{
     /* font-size: large; */
     border-radius: 1rem;
 }
+
