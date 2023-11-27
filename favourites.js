@@ -1,5 +1,6 @@
 //import {getHash, getPublicKey, getTimeStamp, fetchData} from './index.js'
 
+//all the dom elements
 let navbarButtonDiv=document.getElementById('navbarButtonDiv')
 let searchBarDiv=document.getElementById('searchBarDiv')
 let mainContainer=document.getElementById('mainContainer')

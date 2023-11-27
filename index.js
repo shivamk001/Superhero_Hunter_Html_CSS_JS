@@ -1,7 +1,10 @@
 let orderBy='name'
 let limit=100
+//list of all superheros
 let allSuperHeros=[]
 
+
+//all the dom elements
 let displaySearchButton=document.getElementById('displaySearchButton')
 let searchBarDiv=document.getElementById('searchBarDiv')
 
@@ -414,7 +417,7 @@ async function getAllSuperheros(){
     let publicKey=getPublicKey()
     let timestampHash=getHash()
     let result=[]
-    let limit=100
+    let limit=10
     let totalHeros=0
     let offset=0
     let index=0
