@@ -290,7 +290,7 @@ input::placeholder{
     /* align-items: center; */
     flex-wrap: wrap;
     height: auto;
-    width: 90%;
+    width: 100%;
 
 }
 
@@ -409,7 +409,7 @@ input::placeholder{
 
 /* CSS FOR SECTIONS IN SUPERHERO PAGE */
 .section{
-    width: 90%;
+    width: 100%;
 }
 
 .section h3{
